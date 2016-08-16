@@ -100,19 +100,19 @@ Page {
             playing: false
         }
         ListElement {
-            btnId: "youtubeBtn"
-            name: "Search on Youtube"
+            btnId: "momentBtn"
+            name: "Moment Moment Moment"
             colour: "red"
-            bicon: "images/icon-l-service-youtube.png"
-            sound: ""
+            bicon: "images/blumen-icon.png"
+            sound: "sounds/karneval/moment-moment-moment.ogg"
             playing: false
         }
         ListElement {
-            btnId: "openFileBtn"
-            name: "Browse Files"
+            btnId: "alaafBtn"
+            name: "Kölle Alaaf"
             colour: "blue"
-            bicon: "images/icon-l-media-files.png"
-            sound: ""
+            bicon: "images/trommel-icon.png"
+            sound: "sounds/karneval/kölle_alaaf.ogg"
             playing: false
         }
         ListElement {
