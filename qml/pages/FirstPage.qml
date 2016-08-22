@@ -39,7 +39,7 @@ Page {
     SilicaGridView {
         id: grid
         width: parent.width
-        height: page.height
+        height: page.height - setName.height
 
         PullDownMenu {
             id: pulley
@@ -55,6 +55,7 @@ Page {
             title: "Tuschbox"
             Component.onCompleted: grid.pageHeader = pageHeader
         }
+
         cellWidth: {
             if (page.orientation == Orientation.PortraitInverted || page.orientation == Orientation.Portrait)
                 page.width / 2
@@ -90,6 +91,7 @@ Page {
             bicon: "images/mask-icon.png"
             sound: "sounds/karneval/tusch.ogg"
             playing: false
+            set: "Kölner Karneval"
         }
         ListElement {
             btnId: "jetztgehtsLosBtn"
@@ -98,6 +100,7 @@ Page {
             bicon: "images/stars-icon.png"
             sound: "sounds/karneval/jetzt-geht-los.ogg"
             playing: false
+            set: "Kölner Karneval"
         }
         ListElement {
             btnId: "momentBtn"
@@ -106,6 +109,7 @@ Page {
             bicon: "images/blumen-icon.png"
             sound: "sounds/karneval/moment-moment-moment.ogg"
             playing: false
+            set: "Kölner Karneval"
         }
         ListElement {
             btnId: "alaafBtn"
@@ -114,22 +118,34 @@ Page {
             bicon: "images/trommel-icon.png"
             sound: "sounds/karneval/kölle_alaaf.ogg"
             playing: false
+            set: "Kölner Karneval"
         }
         ListElement {
-            btnId: "openUrlBtn"
-            name: "Enter URL"
+            btnId: "herzBtn"
+            name: "Schenk mir dein Herz"
             colour: "green"
-            bicon: "images/icon-l-redirect.png"
-            sound: ""
+            bicon: "images/heart-icon.png"
+            sound: "sounds/karneval/schenk-mir-dein-herz.ogg"
             playing: false
+            set: "Kölner Karneval"
         }
         ListElement {
-            btnId: "playlistBtn"
-            name: "Playlists"
+            btnId: "ohohohieoBtn"
+            name: "Oh oh oh - ieeeeeeooo"
             colour: "yellow"
-            bicon: "images/icon-l-clipboard.png"
-            sound: ""
+            bicon: "images/konfetti-icon.png"
+            sound: "sounds/karneval/ohohoh-ieo.ogg"
             playing: false
+            set: "Kölner Karneval"
+        }
+        ListElement {
+            btnId: "byebyeBtn"
+            name: "Bye bye my love"
+            colour: "orange"
+            bicon: "images/bye-icon.png"
+            sound: "sounds/karneval/bye-bye-my-love.ogg"
+            playing: false
+            set: "Kölner Karneval"
         }
     }
 
@@ -141,15 +157,23 @@ Page {
             height: grid.cellHeight
             text: qsTr(name)
             _playing: playing
+            function play() {
+                menuButtons.set(index, {"playing" : true})
+                player.source = sound
+                player.play()
+            }
+
             onClicked: {
-                // TODO Player load & play mfile
-                if (player.playbackState == MediaPlayer.PlayingState) player.stop()
+                if (player.playbackState == MediaPlayer.PlayingState) {
+                    if (menuButtons.get(index).playing != true) {
+                        player.stop()
+                        play()
+                    }
+                    else player.stop()
+                }
                 else if (playing == false) {
-                    console.debug("[FirstPage.qml] Clicked button " + btnId + " to play " + sound)
-                    menuButtons.set(index, {"playing" : true})
-                    //console.debug("[FirstPage.qml] Playing = " + playing)
-                    player.source = sound
-                    player.play()
+                    // console.debug("[FirstPage.qml] Clicked button " + btnId + " to play " + sound)
+                    play()
                 }
             }
             color: colour
@@ -164,6 +188,12 @@ Page {
                 menuButtons.set(i, {"playing" : false})
             }
         }
+    }
+
+    SectionHeader {
+        id: setName
+        anchors.bottom: page.bottom
+        text: menuButtons.get(0).set
     }
 
 }
