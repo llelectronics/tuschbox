@@ -34,7 +34,7 @@ import "pages"
 
 ApplicationWindow
 {
-    initialPage: Component { FirstPage { } }
+    //initialPage: Component { FirstPage { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: Orientation.All
     _defaultPageOrientations: Orientation.All
@@ -42,6 +42,14 @@ ApplicationWindow
     property string version: "1.0"
     property string appname: "Tuschbox"
     property string appicon: "images/icon.png"
+
+    function createSoundPage(name) {
+        pageStack.push("pages/FirstPage.qml",{soundboardName: name})
+    }
+
+    Component.onCompleted: {
+        createSoundPage("default")
+    }
 }
 
 

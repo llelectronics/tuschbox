@@ -36,6 +36,71 @@ import "components"
 Page {
     id: page
 
+    property string soundboardName
+
+    Component.onCompleted: {
+        if (soundboardName == "default") {
+            console.debug("Loading default profile...")
+            setName.text = "Kölner Karneval"
+            menuButtons.append({ btnId: "tuschBtn",
+                                   name: "Tusch",
+                                   colour: "gray",
+                                   bicon: "images/mask-icon.png",
+                                   sound: "sounds/karneval/tusch.ogg",
+                                   playing: false,
+                                   set: "Kölner Karneval"
+                               })
+            menuButtons.append({ btnId: "jetztgehtsLosBtn",
+                                    name: "Jetzt gehts los",
+                                    colour: "brown",
+                                    bicon: "images/stars-icon.png",
+                                    sound: "sounds/karneval/jetzt-geht-los.ogg",
+                                    playing: false,
+                                    set: "Kölner Karneval"
+                                })
+            menuButtons.append({ btnId: "momentBtn",
+                                   name: "Moment Moment Moment",
+                                   colour: "red",
+                                   bicon: "images/blumen-icon.png",
+                                   sound: "sounds/karneval/moment-moment-moment.ogg",
+                                   playing: false,
+                                   set: "Kölner Karneval"
+                               })
+            menuButtons.append({ btnId: "alaafBtn",
+                                   name: "Kölle Alaaf",
+                                   colour: "blue",
+                                   bicon: "images/trommel-icon.png",
+                                   sound: "sounds/karneval/kölle_alaaf.ogg",
+                                   playing: false,
+                                   set: "Kölner Karneval"
+                               })
+            menuButtons.append({ btnId: "herzBtn",
+                                   name: "Schenk mir dein Herz",
+                                   colour: "green",
+                                   bicon: "images/heart-icon.png",
+                                   sound: "sounds/karneval/schenk-mir-dein-herz.ogg",
+                                   playing: false,
+                                   set: "Kölner Karneval"
+                               })
+            menuButtons.append({ btnId: "ohohohieoBtn",
+                                   name: "Oh oh oh - ieeeeeeooo",
+                                   colour: "yellow",
+                                   bicon: "images/konfetti-icon.png",
+                                   sound: "sounds/karneval/ohohoh-ieo.ogg",
+                                   playing: false,
+                                   set: "Kölner Karneval"
+                               })
+            menuButtons.append({ btnId: "byebyeBtn",
+                                   name: "Bye bye my love",
+                                   colour: "orange",
+                                   bicon: "images/bye-icon.png",
+                                   sound: "sounds/karneval/bye-bye-my-love.ogg",
+                                   playing: false,
+                                   set: "Kölner Karneval"
+                               })
+        }
+    }
+
     SilicaGridView {
         id: grid
         width: parent.width
@@ -82,71 +147,71 @@ Page {
     ListModel {
         id: menuButtons
 
-        // 8 Items
+        // 7 Items
 
-        ListElement {
-            btnId: "tuschBtn"
-            name: "Tusch"
-            colour: "gray"
-            bicon: "images/mask-icon.png"
-            sound: "sounds/karneval/tusch.ogg"
-            playing: false
-            set: "Kölner Karneval"
-        }
-        ListElement {
-            btnId: "jetztgehtsLosBtn"
-            name: "Jetzt gehts los"
-            colour: "brown"
-            bicon: "images/stars-icon.png"
-            sound: "sounds/karneval/jetzt-geht-los.ogg"
-            playing: false
-            set: "Kölner Karneval"
-        }
-        ListElement {
-            btnId: "momentBtn"
-            name: "Moment Moment Moment"
-            colour: "red"
-            bicon: "images/blumen-icon.png"
-            sound: "sounds/karneval/moment-moment-moment.ogg"
-            playing: false
-            set: "Kölner Karneval"
-        }
-        ListElement {
-            btnId: "alaafBtn"
-            name: "Kölle Alaaf"
-            colour: "blue"
-            bicon: "images/trommel-icon.png"
-            sound: "sounds/karneval/kölle_alaaf.ogg"
-            playing: false
-            set: "Kölner Karneval"
-        }
-        ListElement {
-            btnId: "herzBtn"
-            name: "Schenk mir dein Herz"
-            colour: "green"
-            bicon: "images/heart-icon.png"
-            sound: "sounds/karneval/schenk-mir-dein-herz.ogg"
-            playing: false
-            set: "Kölner Karneval"
-        }
-        ListElement {
-            btnId: "ohohohieoBtn"
-            name: "Oh oh oh - ieeeeeeooo"
-            colour: "yellow"
-            bicon: "images/konfetti-icon.png"
-            sound: "sounds/karneval/ohohoh-ieo.ogg"
-            playing: false
-            set: "Kölner Karneval"
-        }
-        ListElement {
-            btnId: "byebyeBtn"
-            name: "Bye bye my love"
-            colour: "orange"
-            bicon: "images/bye-icon.png"
-            sound: "sounds/karneval/bye-bye-my-love.ogg"
-            playing: false
-            set: "Kölner Karneval"
-        }
+//        ListElement {
+//            btnId: "tuschBtn"
+//            name: "Tusch"
+//            colour: "gray"
+//            bicon: "images/mask-icon.png"
+//            sound: "sounds/karneval/tusch.ogg"
+//            playing: false
+//            set: "Kölner Karneval"
+//        }
+//        ListElement {
+//            btnId: "jetztgehtsLosBtn"
+//            name: "Jetzt gehts los"
+//            colour: "brown"
+//            bicon: "images/stars-icon.png"
+//            sound: "sounds/karneval/jetzt-geht-los.ogg"
+//            playing: false
+//            set: "Kölner Karneval"
+//        }
+//        ListElement {
+//            btnId: "momentBtn"
+//            name: "Moment Moment Moment"
+//            colour: "red"
+//            bicon: "images/blumen-icon.png"
+//            sound: "sounds/karneval/moment-moment-moment.ogg"
+//            playing: false
+//            set: "Kölner Karneval"
+//        }
+//        ListElement {
+//            btnId: "alaafBtn"
+//            name: "Kölle Alaaf"
+//            colour: "blue"
+//            bicon: "images/trommel-icon.png"
+//            sound: "sounds/karneval/kölle_alaaf.ogg"
+//            playing: false
+//            set: "Kölner Karneval"
+//        }
+//        ListElement {
+//            btnId: "herzBtn"
+//            name: "Schenk mir dein Herz"
+//            colour: "green"
+//            bicon: "images/heart-icon.png"
+//            sound: "sounds/karneval/schenk-mir-dein-herz.ogg"
+//            playing: false
+//            set: "Kölner Karneval"
+//        }
+//        ListElement {
+//            btnId: "ohohohieoBtn"
+//            name: "Oh oh oh - ieeeeeeooo"
+//            colour: "yellow"
+//            bicon: "images/konfetti-icon.png"
+//            sound: "sounds/karneval/ohohoh-ieo.ogg"
+//            playing: false
+//            set: "Kölner Karneval"
+//        }
+//        ListElement {
+//            btnId: "byebyeBtn"
+//            name: "Bye bye my love"
+//            colour: "orange"
+//            bicon: "images/bye-icon.png"
+//            sound: "sounds/karneval/bye-bye-my-love.ogg"
+//            playing: false
+//            set: "Kölner Karneval"
+//        }
     }
 
     Component {
@@ -193,7 +258,6 @@ Page {
     SectionHeader {
         id: setName
         anchors.bottom: page.bottom
-        text: menuButtons.get(0).set
     }
 
 }
