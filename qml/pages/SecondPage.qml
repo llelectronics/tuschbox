@@ -32,27 +32,39 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 
-Page {
-    id: page
-    SilicaListView {
-        id: listView
-        model: 20
-        anchors.fill: parent
-        header: PageHeader {
-            title: qsTr("Nested Page")
-        }
-        delegate: BackgroundItem {
-            id: delegate
+Dialog {
+    id: newSoundBoardDialog
+    canAccept: false
+    onAccepted: {
+        // TODO create new FirstPage with soundboardName entered)
+    }
 
-            Label {
-                x: Theme.paddingLarge
-                text: qsTr("Item") + " " + index
-                anchors.verticalCenter: parent.verticalCenter
-                color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
+    DialogHeader {
+        id: header
+        acceptText: qsTr("Create")
+        title: qsTr("Create new Soundboard")
+    }
+
+    SilicaFlickable {
+        id: flick
+        width: parent.width
+        height: parent.height - header.height
+        anchors.top: header.bottom
+        TextField {
+            id: newSoundboardName
+            focus: true
+            width: parent.width - 2 * Theme.paddingMedium
+            anchors.top: parent.top
+            anchors.topMargin: Theme.paddingLarge
+            anchors.left: parent.left
+            anchors.leftMargin: Theme.paddingMedium
+            placeholderText: qsTr("Name of the new soundboard")
+            label: qsTr("Soundboard Name")
+            onTextChanged: {
+                if (text != "") newSoundBoardDialog.canAccept = true
+                else newSoundBoardDialog.canAccept = false
             }
-            onClicked: console.log("Clicked " + index)
         }
-        VerticalScrollDecorator {}
     }
 }
 

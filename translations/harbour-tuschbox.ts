@@ -16,13 +16,32 @@
     </message>
 </context>
 <context>
-    <name>SecondPage</name>
+    <name>FirstPage</name>
     <message>
-        <source>Nested Page</source>
+        <source>About </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Item</source>
+        <source>New Soundboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SecondPage</name>
+    <message>
+        <source>Create</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new Soundboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name of the new soundboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Soundboard Name</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

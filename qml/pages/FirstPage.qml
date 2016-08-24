@@ -109,8 +109,12 @@ Page {
         PullDownMenu {
             id: pulley
             MenuItem {
-                text: "About "+ appname
+                text: qsTr("About ") + appname
                 onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"));
+            }
+            MenuItem {
+                text: qsTr("New Soundboard")
+                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"));
             }
         }
         property PageHeader pageHeader

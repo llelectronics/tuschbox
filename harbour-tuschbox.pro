@@ -44,5 +44,6 @@ DISTFILES += \
     qml/pages/images/mask-icon.png \
     qml/pages/sounds/karneval/jetzt-geht-los.ogg \
     qml/pages/sounds/karneval/tusch.ogg \
-    qml/pages/images/stars-icon.png
+    qml/pages/images/stars-icon.png \
+    qml/pages/js/db.js
 
