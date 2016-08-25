@@ -34,9 +34,16 @@ import Sailfish.Silica 1.0
 
 Dialog {
     id: newSoundBoardDialog
+
+    property alias soundBoardName: newSoundboardName.text
+
     canAccept: false
+    acceptDestination: Qt.resolvedUrl("FirstPage.qml")
+    //acceptDestinationProperties: { "soundboardName": soundBoardName }
+    acceptDestinationAction: PageStackAction.Replace
+
     onAccepted: {
-        // TODO create new FirstPage with soundboardName entered)
+        acceptDestinationInstance.soundboardName = soundBoardName
     }
 
     DialogHeader {
@@ -61,7 +68,7 @@ Dialog {
             placeholderText: qsTr("Name of the new soundboard")
             label: qsTr("Soundboard Name")
             onTextChanged: {
-                if (text != "") newSoundBoardDialog.canAccept = true
+                if (text != "") { newSoundBoardDialog.canAccept = true; }
                 else newSoundBoardDialog.canAccept = false
             }
         }

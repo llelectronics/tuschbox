@@ -34,6 +34,7 @@ import "pages"
 
 ApplicationWindow
 {
+    id: mainWindow
     //initialPage: Component { FirstPage { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: Orientation.All
@@ -44,7 +45,7 @@ ApplicationWindow
     property string appicon: "images/icon.png"
 
     function createSoundPage(name) {
-        pageStack.push("pages/FirstPage.qml",{soundboardName: name})
+        pageStack.replace("pages/FirstPage.qml",{soundboardName: name})
     }
 
     Component.onCompleted: {

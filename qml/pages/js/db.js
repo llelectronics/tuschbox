@@ -16,15 +16,15 @@ function initialize() {
                     // Create the bookmarks table if it doesn't already exist
                     // If the table exists, this is skipped
 
-//                    btnId: "tuschBtn",
-//                           name: "Tusch",
-//                           colour: "gray",
-//                           bicon: "images/mask-icon.png",
-//                           sound: "sounds/karneval/tusch.ogg",
-//                           playing: false,
-//                           set: "Kölner Karneval"
+                    //                    btnId: "tuschBtn",
+                    //                           name: "Tusch",
+                    //                           colour: "gray",
+                    //                           bicon: "images/mask-icon.png",
+                    //                           sound: "sounds/karneval/tusch.ogg",
+                    //                           playing: false,
+                    //                           set: "Kölner Karneval"
 
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS soundsets(btnId TEXT, name TEXT, colour TEXT, bicon TEXT, sound TEXT, playing TEXT, set TEXT)');
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS soundsets(btnId TEXT, name TEXT, colour TEXT, bicon TEXT, sound TEXT, playing TEXT, sset TEXT)');
                     var table  = tx.executeSql("SELECT * FROM soundsets");
                     // Insert template soundset if no soundsets are set / empty soundsets db
                     if (table.rows.length === 0) {
@@ -39,16 +39,16 @@ function initialize() {
                 });
 }
 
-// This function is used to write bookmarks into the database
-function addToSoundset(btnId,name,colour,bicon,sound,playing,set) {
+// This function is used to write soundsets into the database
+function addToSoundset(btnId,name,colour,bicon,sound,playing,sset) {
     var db = getDatabase();
     var res = "";
     db.transaction(function(tx) {
         // Remove and readd if url already in bookmarks
-        removeSoundset(btnId,set);
-        console.debug("Adding to soundset db:" + name + " " + sound + " in " + set + " for button " + btnId);
+        removeSoundset(btnId,sset);
+        console.debug("Adding to soundset db:" + name + " " + sound + " in " + sset + " for button " + btnId);
 
-        var rs = tx.executeSql('INSERT OR REPLACE INTO soundsets VALUES (?,?,?,?,?,?,?);', [btnId,name,colour,bicon,sound,playing,set]);
+        var rs = tx.executeSql('INSERT OR REPLACE INTO soundsets VALUES (?,?,?,?,?,?,?);', [btnId,name,colour,bicon,sound,playing,sset]);
         if (rs.rowsAffected > 0) {
             res = "OK";
             console.log ("Saved to database");
@@ -62,32 +62,41 @@ function addToSoundset(btnId,name,colour,bicon,sound,playing,set) {
     return res;
 }
 
-// This function is used to remove a bookmark from database
-function removeSoundset(btnId,set) {
+// This function is used to remove a soundset from database
+function removeSoundset(btnId,sset) {
     var db = getDatabase();
     var respath="";
     db.transaction(function(tx) {
-        var rs = tx.executeSql('DELETE FROM soundsets WHERE btnId=(?) AND set=(?);', [btnId,set]);
-//        if (rs.rowsAffected > 0) {
-//            console.debug("Url found and removed");
-//        } else {
-//            console.debug("Url not found");
-//        }
+        var rs = tx.executeSql('DELETE FROM soundsets WHERE btnId=(?) AND sset=(?);', [btnId,sset]);
+        //        if (rs.rowsAffected > 0) {
+        //            console.debug("Url found and removed");
+        //        } else {
+        //            console.debug("Url not found");
+        //        }
+    })
+}
+// This function is used to retrieve bookmarks from database
+function getSounds(page,sset) {
+    var db = getDatabase();
+    var respath="";
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('SELECT * FROM soundsets WHERE sset=(?);', [sset]);
+        if (rs.rowsAffected > 0) {
+            addSoundBtn(page,rs)
+        } else {
+            // If set not found add temp buttons from temp set
+            console.debug("Set not found");
+            var rsTemp = tx.executeSql('SELECT * FROM soundsets WHERE sset=(?);', ["temp"]);
+            addSoundBtn(page,rsTemp);
+        }
     })
 }
 
-// This function is used to retrieve bookmarks from database
-function getSounds(set) {
-    var db = getDatabase();
-    var respath="";
-    db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT * FROM soundsets WHERE set=(?);', [set]);
-        for (var i = 0; i < rs.rows.length; i++) {
-            // TODO: parent.addSoundButtons rs.rows.item(i).[allArguments]
-            // If set not found add temp buttons from temp set
-            //console.debug("Get Bookmarks from db:" + rs.rows.item(i).title, rs.rows.item(i).url)
-        }
-    })
+// Add SoundButton to the UI
+function addSoundBtn(page,res) {
+    for (var i = 0; i < res.rows.length; i++) {
+        page.addSoundButton(res.rows.item(i).btnId,res.rows.item(i).name,res.rows.item(i).colour,res.rows.item(i).bicon,res.rows.item(i).sound,res.rows.item(i).playing,res.rows.item(i).set);
+    }
 }
 
 // TODO: Adapt everything below here ------------
@@ -114,8 +123,8 @@ function addSetting(setting,value) {
 function stringToBoolean(str) {
     switch(str.toLowerCase()){
     case "true": case "yes": case "1": return true;
-    case "false": case "no": case "0": case null: return false;
-    default: return Boolean(string);
+                             case "false": case "no": case "0": case null: return false;
+                                                                default: return Boolean(string);
     }
 }
 
@@ -152,11 +161,11 @@ function addHistory(url) {
     db.transaction(function(tx) {
         // Remove and readd if url already in history
         var rs0 = tx.executeSql('delete from history where url=(?);',[url]);
-//        if (rs0.rowsAffected > 0) {
-//            console.debug("Url already found and removed to readd it");
-//        } else {
-//            console.debug("Url not found so add it newly");
-//        }
+        //        if (rs0.rowsAffected > 0) {
+        //            console.debug("Url already found and removed to readd it");
+        //        } else {
+        //            console.debug("Url not found so add it newly");
+        //        }
 
         var rs = tx.executeSql('INSERT OR REPLACE INTO history VALUES (?,?);', [date.getTime(),url]);
         if (rs.rowsAffected > 0) {
@@ -180,11 +189,11 @@ function searchHistory(searchTerm) {
         // Search bookmarks second
         var rs1 = tx.executeSql("SELECT url FROM bookmarks WHERE url LIKE ?;", ["%" + searchTerm + "%"]);
 
-//        if (rs.rowsAffected > 0) {
-//            console.debug("Successfully executed")
-//            console.debug(rs.rows.item(0).url)
-//        }
-//        else console.debug("Not working")
+        //        if (rs.rowsAffected > 0) {
+        //            console.debug("Successfully executed")
+        //            console.debug(rs.rows.item(0).url)
+        //        }
+        //        else console.debug("Not working")
         var hisFound
         var r = /^((https?|file)\:)\/\/(.[^/]+)/;  // Did I mention before how I hate regex. It took my an hour to figure this out and make it work :P
 
@@ -228,7 +237,7 @@ function getHistory() {
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM history ORDER BY history.uid DESC;');
         for (var i = 0; i < rs.rows.length; i++) {
-             historyModel.append({"url" : rs.rows.item(i).url});
+            historyModel.append({"url" : rs.rows.item(i).url});
         }
     })
 }
@@ -239,11 +248,11 @@ function removeHistory(url) {
     var respath="";
     db.transaction(function(tx) {
         var rs = tx.executeSql('DELETE FROM history WHERE url=(?);', [url]);
-//        if (rs.rowsAffected > 0) {
-//            console.debug("Url found and removed");
-//        } else {
-//            console.debug("Url not found");
-//        }
+        //        if (rs.rowsAffected > 0) {
+        //            console.debug("Url found and removed");
+        //        } else {
+        //            console.debug("Url not found");
+        //        }
     })
 }
 

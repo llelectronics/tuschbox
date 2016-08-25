@@ -32,13 +32,26 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtMultimedia 5.0
 import "components"
+import "js/db.js" as DB
 
 Page {
     id: page
 
-    property string soundboardName
+    property alias soundboardName: setName.text
+
+    function addSoundButton(btnId, name, colour, bicon, sound, playing, set) {
+        menuButtons.append({ "btnId": btnId,
+                               "name": name,
+                               "colour": colour,
+                               "bicon": bicon,
+                               "sound": sound,
+                               "playing": playing,
+                               "set": set
+                           })
+    }
 
     Component.onCompleted: {
+        DB.initialize();
         if (soundboardName == "default") {
             console.debug("Loading default profile...")
             setName.text = "Kölner Karneval"
@@ -99,6 +112,9 @@ Page {
                                    set: "Kölner Karneval"
                                })
         }
+        else {
+            DB.getSounds(page,soundboardName);
+        }
     }
 
     SilicaGridView {
@@ -114,7 +130,9 @@ Page {
             }
             MenuItem {
                 text: qsTr("New Soundboard")
-                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"));
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("SecondPage.qml"));
+                }
             }
         }
         property PageHeader pageHeader
