@@ -16,6 +16,21 @@
     </message>
 </context>
 <context>
+    <name>EditButton</name>
+    <message>
+        <source>Edit Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Soundfile</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>FirstPage</name>
     <message>
         <source>About </source>

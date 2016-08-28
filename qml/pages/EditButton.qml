@@ -678,27 +678,105 @@ Public License instead of this License.  But first, please read
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "pages"
 
-ApplicationWindow
-{
-    id: mainWindow
-    //initialPage: Component { FirstPage { } }
-    cover: Qt.resolvedUrl("cover/CoverPage.qml")
-    allowedOrientations: Orientation.All
-    _defaultPageOrientations: Orientation.All
+Page {
+    id: editPage
 
-    property string version: "1.0"
-    property string appname: "Tuschbox"
-    property string appicon: "images/icon.png"
+    // TODO: Check if all are necessary
+    property alias color: colortag.color
+    property alias text: buttonText.text
+    property alias icon: logo.source
+    property bool _playing: false
+    property string mfile
+    property int position
+    property string uid
+    property string soundSet
 
-    function createSoundPage(name) {
-        pageStack.replace("pages/FirstPage.qml",{soundboardName: name})
+
+    function findBaseNameFull(url) {
+        var fileName = url.substring(url.lastIndexOf('/') + 1);
+        return fileName
     }
 
-    Component.onCompleted: {
-        createSoundPage("default")
+    onMfileChanged: {
+        soundPath.text = findBaseNameFull(mfile)
     }
+
+
+   SilicaFlickable {
+       id: flick
+       anchors.fill: parent
+
+       PageHeader {
+           id: head
+           title: qsTr("Edit Button")
+       }
+
+       Image {
+           id: logo
+           anchors.top: head.bottom
+           anchors.topMargin: Theme.paddingMedium
+           anchors.left: parent.left
+           anchors.leftMargin: Theme.paddingMedium
+           width: Theme.iconSizeLarge
+           height: width
+           onSourceChanged: {
+               console.debug("Logo: " + source)
+           }
+           // TODO: Click on logo should bring up logo chooser
+       }
+
+       Rectangle {
+           id: colortag
+
+           anchors.top: logo.bottom
+           anchors.topMargin: Theme.paddingLarge
+           anchors.horizontalCenter: logo.horizontalCenter
+           width: Theme.itemSizeSmall
+           height: width
+           radius: Math.round(Theme.paddingSmall/3)
+           // TODO: Click on colortag should bring up color chooser
+       }
+
+       TextField {
+           id: buttonText
+           anchors {
+               top: logo.top
+               topMargin: Theme.paddingMedium
+               left: logo.right
+               leftMargin: Theme.paddingSmall
+               right: parent.right
+           }
+           width: parent.width - logo.width + (2 * Theme.paddingLarge)
+           color: Theme.primaryColor
+           label: qsTr("Title")
+       }
+
+       TextField {
+           id: soundPath
+           anchors {
+               top: buttonText.bottom
+               topMargin: Theme.paddingMedium
+               left: logo.right
+               leftMargin: Theme.paddingSmall
+               right: parent.right
+           }
+           width: parent.width - logo.width + (2 * Theme.paddingLarge)
+           color: Theme.primaryColor
+           label: qsTr("Soundfile")
+           inputMethodHints: Qt.ImhUrlCharactersOnly
+           onFocusChanged: {
+               if (focus) {
+                   selectAll();
+                   label = mfile
+               }
+               else {
+                   label = qsTr("Soundfile")
+               }
+           }
+       }
+
+       // TODO: Button "Choose Soundfile" + Playback control
+   }
 }
-
 
