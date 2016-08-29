@@ -29,6 +29,26 @@
         <source>Soundfile</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Choose Soundfile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Soundfile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FirstPage</name>
@@ -38,6 +58,13 @@
     </message>
     <message>
         <source>New Soundboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OpenDialog</name>
+    <message>
+        <source>Open file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

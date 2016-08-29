@@ -679,7 +679,7 @@ Public License instead of this License.  But first, please read
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-Page {
+Dialog {
     id: editPage
 
     // TODO: Check if all are necessary
@@ -703,80 +703,133 @@ Page {
     }
 
 
-   SilicaFlickable {
-       id: flick
-       anchors.fill: parent
+    SilicaFlickable {
+        id: flick
+        anchors.fill: parent
 
-       PageHeader {
-           id: head
-           title: qsTr("Edit Button")
-       }
+        DialogHeader {
+            id: head
+            title: qsTr("Edit Button")
+            acceptText: qsTr("Save")
+        }
 
-       Image {
-           id: logo
-           anchors.top: head.bottom
-           anchors.topMargin: Theme.paddingMedium
-           anchors.left: parent.left
-           anchors.leftMargin: Theme.paddingMedium
-           width: Theme.iconSizeLarge
-           height: width
-           onSourceChanged: {
-               console.debug("Logo: " + source)
-           }
-           // TODO: Click on logo should bring up logo chooser
-       }
+        Image {
+            id: logo
+            anchors.top: head.bottom
+            anchors.topMargin: Theme.paddingMedium
+            anchors.left: parent.left
+            anchors.leftMargin: Theme.paddingMedium
+            width: Theme.iconSizeLarge
+            height: width
+            onSourceChanged: {
+                console.debug("Logo: " + source)
+            }
+            // TODO: Click on logo should bring up logo chooser
+        }
 
-       Rectangle {
-           id: colortag
+        Rectangle {
+            id: colortag
 
-           anchors.top: logo.bottom
-           anchors.topMargin: Theme.paddingLarge
-           anchors.horizontalCenter: logo.horizontalCenter
-           width: Theme.itemSizeSmall
-           height: width
-           radius: Math.round(Theme.paddingSmall/3)
-           // TODO: Click on colortag should bring up color chooser
-       }
+            anchors.top: logo.bottom
+            anchors.topMargin: Theme.paddingLarge
+            anchors.horizontalCenter: logo.horizontalCenter
+            width: Theme.itemSizeSmall
+            height: width
+            radius: Math.round(Theme.paddingSmall/3)
+            // TODO: Click on colortag should bring up color chooser
+            MouseArea {
+                id: colorTagClick
+                anchors.fill: parent
+                onClicked: {
+                    var dialog = pageStack.push("Sailfish.Silica.ColorPickerDialog")
+                    dialog.accepted.connect(function() {
+                        colortag.color = dialog.color
+                    })
+                }
+            }
+        }
 
-       TextField {
-           id: buttonText
-           anchors {
-               top: logo.top
-               topMargin: Theme.paddingMedium
-               left: logo.right
-               leftMargin: Theme.paddingSmall
-               right: parent.right
-           }
-           width: parent.width - logo.width + (2 * Theme.paddingLarge)
-           color: Theme.primaryColor
-           label: qsTr("Title")
-       }
+        TextField {
+            id: buttonText
+            anchors {
+                top: logo.top
+                topMargin: Theme.paddingMedium
+                left: logo.right
+                leftMargin: Theme.paddingSmall
+                right: parent.right
+            }
+            width: parent.width - logo.width + (2 * Theme.paddingLarge)
+            color: Theme.primaryColor
+            label: qsTr("Title")
+        }
 
-       TextField {
-           id: soundPath
-           anchors {
-               top: buttonText.bottom
-               topMargin: Theme.paddingMedium
-               left: logo.right
-               leftMargin: Theme.paddingSmall
-               right: parent.right
-           }
-           width: parent.width - logo.width + (2 * Theme.paddingLarge)
-           color: Theme.primaryColor
-           label: qsTr("Soundfile")
-           inputMethodHints: Qt.ImhUrlCharactersOnly
-           onFocusChanged: {
-               if (focus) {
-                   selectAll();
-                   label = mfile
-               }
-               else {
-                   label = qsTr("Soundfile")
-               }
-           }
-       }
+        TextField {
+            id: soundPath
+            anchors {
+                top: buttonText.bottom
+                topMargin: Theme.paddingMedium
+                left: logo.right
+                leftMargin: Theme.paddingSmall
+                right: parent.right
+            }
+            width: parent.width - logo.width + (2 * Theme.paddingLarge)
+            color: Theme.primaryColor
+            label: qsTr("Soundfile")
+            inputMethodHints: Qt.ImhUrlCharactersOnly
+            onFocusChanged: {
+                if (focus) {
+                    selectAll();
+                    label = mfile
+                }
+                else {
+                    label = qsTr("Soundfile")
+                }
+            }
+        }
 
-       // TODO: Button "Choose Soundfile" + Playback control
-   }
+        Row {
+            id: soundPathRow
+            anchors {
+                top: soundPath.bottom
+                topMargin: Theme.paddingMedium
+                horizontalCenter: parent.horizontalCenter
+            }
+            spacing: Theme.paddingMedium
+            Button {
+                id: openBtn
+                text: qsTr("Choose Soundfile")
+                onClicked: {
+                    pageStack.push(openFileComponent)
+                }
+            }
+            Button {
+                id: playBtn
+                text: _playing ? qsTr("Stop") : qsTr("Play")
+                onClicked: {
+                    if (_playing) {
+                        mainWindow.fPage.mplayer.stop()
+                        _playing = false
+                    } else {
+                        mainWindow.fPage.mplayer.source = mfile
+                        mainWindow.fPage.mplayer.play()
+                        _playing = true
+                    }
+                }
+            }
+        }
+
+        Component {
+            id: openFileComponent
+            OpenDialog {
+                title: qsTr("Select Soundfile")
+                path: _fm.getHome()
+                filter: ["*.mp3", "*.wav", "*.ogg", "*.flac", "*.m4a", "*.oga", "*.wma"]
+                onOpenFile: {
+                    mfile = path;
+                    pageStack.pop();
+                }
+            }
+        }
+    }
 }
 

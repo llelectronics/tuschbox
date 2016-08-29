@@ -33,6 +33,8 @@
 #endif
 
 #include <sailfishapp.h>
+#include "fmhelper.hpp"
+#include "folderlistmodel/qquickfolderlistmodel.h"
 
 
 int main(int argc, char *argv[])
@@ -46,6 +48,19 @@ int main(int argc, char *argv[])
     //
     // To display the view, call "show()" (will show fullscreen on device).
 
-    return SailfishApp::main(argc, argv);
+    QGuiApplication *app = SailfishApp::application(argc, argv);
+    app->setApplicationVersion("1.0");
+
+    qmlRegisterType<QQuickFolderListModel>("harbour.tuschbox.Tuschbox", 1, 0, "FolderListModel");
+
+    QQuickView *view = SailfishApp::createView(); // I get a white background with this.
+    view->setSource(SailfishApp::pathTo("qml/harbour-tuschbox.qml"));  // So I do this ;)
+
+    FM *fileAction = new FM();
+    view->engine()->rootContext()->setContextProperty("_fm", fileAction);
+
+    view->show();
+
+    return app->exec();
 }
 

@@ -14,7 +14,9 @@ TARGET = harbour-tuschbox
 
 CONFIG += sailfishapp
 
-SOURCES += src/harbour-tuschbox.cpp
+SOURCES += src/harbour-tuschbox.cpp \
+    src/folderlistmodel/fileinfothread.cpp \
+    src/folderlistmodel/qquickfolderlistmodel.cpp
 
 OTHER_FILES += qml/harbour-tuschbox.qml \
     qml/cover/CoverPage.qml \
@@ -46,5 +48,12 @@ DISTFILES += \
     qml/pages/sounds/karneval/tusch.ogg \
     qml/pages/images/stars-icon.png \
     qml/pages/js/db.js \
-    qml/pages/EditButton.qml
+    qml/pages/EditButton.qml \
+    qml/pages/OpenDialog.qml
+
+HEADERS += \
+    src/folderlistmodel/fileinfothread_p.h \
+    src/folderlistmodel/fileproperty_p.h \
+    src/folderlistmodel/qquickfolderlistmodel.h \
+    src/fmhelper.hpp
 

@@ -8,6 +8,9 @@ function getDatabase() {
 
 String.prototype.contains = function(it) { return this.indexOf(it) != -1; };
 
+// Path to qml Files
+var qmlPath = "/usr/share/harbour-tuschbox/qml/pages/"
+
 // At the start of the application, we can initialize the tables we need if they haven't been created yet
 function initialize() {
     var db = getDatabase();
@@ -28,13 +31,13 @@ function initialize() {
                     var table  = tx.executeSql("SELECT * FROM soundsets");
                     // Insert template soundset if no soundsets are set / empty soundsets db
                     if (table.rows.length === 0) {
-                        tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn1", "Empty", "red", "images/mask-icon.png", "", "false", "temp"]);
-                        tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn2", "Empty", "orange", "images/stars-icon.png", "", "false", "temp"]);
-                        tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn3", "Empty", "yellow", "images/blumen-icon.png", "", "false", "temp"]);
-                        tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn4", "Empty", "green", "images/trommel-icon.png", "", "false", "temp"]);
-                        tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn5", "Empty", "blue", "images/heart-icon.png", "", "false", "temp"]);
-                        tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn6", "Empty", "indigo", "images/konfetti-icon.png", "", "false", "temp"]);
-                        tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn6", "Empty", "violet", "images/bye-icon.png", "", "false", "temp"]);
+                        tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn1", "Empty", "red", qmlPath + "images/mask-icon.png", "empty", "false", "temp"]);
+                        tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn2", "Empty", "orange", qmlPath + "images/stars-icon.png", "empty", "false", "temp"]);
+                        tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn3", "Empty", "yellow", qmlPath + "images/blumen-icon.png", "empty", "false", "temp"]);
+                        tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn4", "Empty", "green", qmlPath + "images/trommel-icon.png", "empty", "false", "temp"]);
+                        tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn5", "Empty", "blue", qmlPath + "images/heart-icon.png", "empty", "false", "temp"]);
+                        tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn6", "Empty", "indigo", qmlPath + "images/konfetti-icon.png", "empty", "false", "temp"]);
+                        tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn6", "Empty", "violet", qmlPath + "images/bye-icon.png", "empty", "false", "temp"]);
                     }
                 });
 }
@@ -82,6 +85,7 @@ function getSounds(page,sset) {
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM soundsets WHERE sset=(?);', [sset]);
         if (rs.rowsAffected > 0) {
+            console.debug("Found sset:" + sset)
             addSoundBtn(page,rs)
         } else {
             // If set not found add temp buttons from temp set
@@ -95,7 +99,8 @@ function getSounds(page,sset) {
 // Add SoundButton to the UI
 function addSoundBtn(page,res) {
     for (var i = 0; i < res.rows.length; i++) {
-        page.addSoundButton(res.rows.item(i).btnId,res.rows.item(i).name,res.rows.item(i).colour,res.rows.item(i).bicon,res.rows.item(i).sound,res.rows.item(i).playing,res.rows.item(i).set);
+        console.debug("Adding Button: " + res.rows.item(i).btnId,res.rows.item(i).name,res.rows.item(i).colour,res.rows.item(i).bicon,res.rows.item(i).sound,res.rows.item(i).playing,res.rows.item(i).sset)
+        page.addSoundButton(res.rows.item(i).btnId,res.rows.item(i).name,res.rows.item(i).colour,res.rows.item(i).bicon,res.rows.item(i).sound,stringToBoolean(res.rows.item(i).playing),res.rows.item(i).sset);
     }
 }
 

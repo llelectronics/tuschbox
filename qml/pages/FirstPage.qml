@@ -686,6 +686,7 @@ Page {
     id: page
 
     property alias soundboardName: setName.text
+    property alias mplayer: player
 
     function addSoundButton(btnId, name, colour, bicon, sound, playing, set) {
         menuButtons.append({ "btnId": btnId,
@@ -699,6 +700,7 @@ Page {
     }
 
     Component.onCompleted: {
+        mainWindow.fPage = page
         DB.initialize();
         if (soundboardName == "default") {
             console.debug("Loading default profile...")
@@ -715,48 +717,48 @@ Page {
             menuButtons.append({ btnId: "jetztgehtsLosBtn",
                                     name: "Jetzt gehts los",
                                     colour: "brown",
-                                    bicon: "images/stars-icon.png",
-                                    sound: "sounds/karneval/jetzt-geht-los.ogg",
+                                    bicon: qmlPath + "images/stars-icon.png",
+                                    sound: qmlPath + "sounds/karneval/jetzt-geht-los.ogg",
                                     playing: false,
                                     set: "Kölner Karneval"
                                 })
             menuButtons.append({ btnId: "momentBtn",
                                    name: "Moment Moment Moment",
                                    colour: "red",
-                                   bicon: "images/blumen-icon.png",
-                                   sound: "sounds/karneval/moment-moment-moment.ogg",
+                                   bicon: qmlPath + "images/blumen-icon.png",
+                                   sound: qmlPath + "sounds/karneval/moment-moment-moment.ogg",
                                    playing: false,
                                    set: "Kölner Karneval"
                                })
             menuButtons.append({ btnId: "alaafBtn",
                                    name: "Kölle Alaaf",
                                    colour: "blue",
-                                   bicon: "images/trommel-icon.png",
-                                   sound: "sounds/karneval/kölle_alaaf.ogg",
+                                   bicon: qmlPath + "images/trommel-icon.png",
+                                   sound: qmlPath + "sounds/karneval/kölle_alaaf.ogg",
                                    playing: false,
                                    set: "Kölner Karneval"
                                })
             menuButtons.append({ btnId: "herzBtn",
                                    name: "Schenk mir dein Herz",
                                    colour: "green",
-                                   bicon: "images/heart-icon.png",
-                                   sound: "sounds/karneval/schenk-mir-dein-herz.ogg",
+                                   bicon: qmlPath + "images/heart-icon.png",
+                                   sound: qmlPath + "sounds/karneval/schenk-mir-dein-herz.ogg",
                                    playing: false,
                                    set: "Kölner Karneval"
                                })
             menuButtons.append({ btnId: "ohohohieoBtn",
                                    name: "Oh oh oh - ieeeeeeooo",
                                    colour: "yellow",
-                                   bicon: "images/konfetti-icon.png",
-                                   sound: "sounds/karneval/ohohoh-ieo.ogg",
+                                   bicon: qmlPath + "images/konfetti-icon.png",
+                                   sound: qmlPath + "sounds/karneval/ohohoh-ieo.ogg",
                                    playing: false,
                                    set: "Kölner Karneval"
                                })
             menuButtons.append({ btnId: "byebyeBtn",
                                    name: "Bye bye my love",
                                    colour: "orange",
-                                   bicon: "images/bye-icon.png",
-                                   sound: "sounds/karneval/bye-bye-my-love.ogg",
+                                   bicon: qmlPath + "images/bye-icon.png",
+                                   sound: qmlPath + "sounds/karneval/bye-bye-my-love.ogg",
                                    playing: false,
                                    set: "Kölner Karneval"
                                })
@@ -820,69 +822,11 @@ Page {
 
         // 7 Items
 
-//        ListElement {
-//            btnId: "tuschBtn"
-//            name: "Tusch"
-//            colour: "gray"
-//            bicon: "images/mask-icon.png"
-//            sound: "sounds/karneval/tusch.ogg"
-//            playing: false
-//            set: "Kölner Karneval"
-//        }
-//        ListElement {
-//            btnId: "jetztgehtsLosBtn"
-//            name: "Jetzt gehts los"
-//            colour: "brown"
-//            bicon: "images/stars-icon.png"
-//            sound: "sounds/karneval/jetzt-geht-los.ogg"
-//            playing: false
-//            set: "Kölner Karneval"
-//        }
-//        ListElement {
-//            btnId: "momentBtn"
-//            name: "Moment Moment Moment"
-//            colour: "red"
-//            bicon: "images/blumen-icon.png"
-//            sound: "sounds/karneval/moment-moment-moment.ogg"
-//            playing: false
-//            set: "Kölner Karneval"
-//        }
-//        ListElement {
-//            btnId: "alaafBtn"
-//            name: "Kölle Alaaf"
-//            colour: "blue"
-//            bicon: "images/trommel-icon.png"
-//            sound: "sounds/karneval/kölle_alaaf.ogg"
-//            playing: false
-//            set: "Kölner Karneval"
-//        }
-//        ListElement {
-//            btnId: "herzBtn"
-//            name: "Schenk mir dein Herz"
-//            colour: "green"
-//            bicon: "images/heart-icon.png"
-//            sound: "sounds/karneval/schenk-mir-dein-herz.ogg"
-//            playing: false
-//            set: "Kölner Karneval"
-//        }
-//        ListElement {
-//            btnId: "ohohohieoBtn"
-//            name: "Oh oh oh - ieeeeeeooo"
-//            colour: "yellow"
-//            bicon: "images/konfetti-icon.png"
-//            sound: "sounds/karneval/ohohoh-ieo.ogg"
-//            playing: false
-//            set: "Kölner Karneval"
-//        }
-//        ListElement {
-//            btnId: "byebyeBtn"
-//            name: "Bye bye my love"
-//            colour: "orange"
-//            bicon: "images/bye-icon.png"
-//            sound: "sounds/karneval/bye-bye-my-love.ogg"
-//            playing: false
-//            set: "Kölner Karneval"
-//        }
+        function setButton(uid, color, text, icon, mfile) {
+            for (var i=0; i<count; i++) {
+                if (get(i).btnId === uid) set(i,{"name":text, "colour":color, "bicon": icon, "sound": mfile});
+            }
+        }
     }
 
     Component {
@@ -916,7 +860,10 @@ Page {
                 if (player.playbackState == MediaPlayer.PlayingState) {
                     player.stop()
                 }
-                pageStack.push(Qt.resolvedUrl("EditButton.qml"),{ "uid" : btnId , "color": colour, "text": name, "icon" : bicon, "mfile": sound, "soundSet" : set });
+                var editButton = pageStack.push(Qt.resolvedUrl("EditButton.qml"),{ "uid" : btnId , "color": colour, "text": name, "icon" : bicon, "mfile": sound, "soundSet" : set });
+                editButton.accepted.connect(function() {
+                    menuButtons.setButton(editButton.uid.toString(), editButton.color.toString(), editButton.text, editButton.icon.toString(), editButton.mfile)
+                })
             }
 
             color: colour
