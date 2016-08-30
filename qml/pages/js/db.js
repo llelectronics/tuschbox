@@ -37,7 +37,7 @@ function initialize() {
                         tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn4", "Empty", "green", qmlPath + "images/trommel-icon.png", "empty", "false", "temp"]);
                         tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn5", "Empty", "blue", qmlPath + "images/heart-icon.png", "empty", "false", "temp"]);
                         tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn6", "Empty", "indigo", qmlPath + "images/konfetti-icon.png", "empty", "false", "temp"]);
-                        tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn6", "Empty", "violet", qmlPath + "images/bye-icon.png", "empty", "false", "temp"]);
+                        tx.executeSql('INSERT INTO soundsets VALUES (?,?,?,?,?,?,?);', ["sBtn7", "Empty", "violet", qmlPath + "images/bye-icon.png", "empty", "false", "temp"]);
                     }
                 });
 }
@@ -92,6 +92,17 @@ function getSounds(page,sset) {
             console.debug("Set not found");
             var rsTemp = tx.executeSql('SELECT * FROM soundsets WHERE sset=(?);', ["temp"]);
             addSoundBtn(page,rsTemp);
+        }
+    })
+}
+
+function getSoundBoards(page) {
+    var db = getDatabase();
+    var respath="";
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('SELECT DISTINCT sset FROM soundsets;');
+        for (var i = 0; i < rs.rows.length; i++) {
+            page.addSoundBards(rs.rows.item(i).sset)
         }
     })
 }

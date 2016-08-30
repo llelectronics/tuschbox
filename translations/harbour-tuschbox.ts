@@ -60,6 +60,14 @@
         <source>New Soundboard</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Save Soundboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Soundboards</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OpenDialog</name>
@@ -84,6 +92,13 @@
     </message>
     <message>
         <source>Soundboard Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SoundBoardList</name>
+    <message>
+        <source>Soundboard List</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -49,7 +49,8 @@ DISTFILES += \
     qml/pages/images/stars-icon.png \
     qml/pages/js/db.js \
     qml/pages/EditButton.qml \
-    qml/pages/OpenDialog.qml
+    qml/pages/OpenDialog.qml \
+    qml/pages/SoundBoardList.qml
 
 HEADERS += \
     src/folderlistmodel/fileinfothread_p.h \

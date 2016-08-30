@@ -678,233 +678,50 @@ Public License instead of this License.  But first, please read
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import QtMultimedia 5.0
-import "components"
+
 import "js/db.js" as DB
 
 Page {
-    id: page
+    id: soundBoardList
 
-    property alias soundboardName: setName.text
-    property alias mplayer: player
-
-    function addSoundButton(btnId, name, colour, bicon, sound, playing, set) {
-        menuButtons.append({ "btnId": btnId,
-                               "name": name,
-                               "colour": colour,
-                               "bicon": bicon,
-                               "sound": sound,
-                               "playing": playing,
-                               "set": set
+    function addSoundBards(sset) {
+        boardLists.append({
+                               "sset": sset
                            })
     }
 
-    Component.onCompleted: {
-        mainWindow.fPage = page
-        DB.initialize();
-        if (soundboardName == "default") {
-            console.debug("Loading default profile...")
-            setName.text = "Kölner Karneval"
-            var qmlPath = "/usr/share/harbour-tuschbox/qml/pages/"
-            menuButtons.append({ btnId: "tuschBtn",
-                                   name: "Tusch",
-                                   colour: "gray",
-                                   bicon: qmlPath + "images/mask-icon.png",
-                                   sound: qmlPath + "sounds/karneval/tusch.ogg",
-                                   playing: false,
-                                   set: "Kölner Karneval"
-                               })
-            menuButtons.append({ btnId: "jetztgehtsLosBtn",
-                                    name: "Jetzt gehts los",
-                                    colour: "brown",
-                                    bicon: qmlPath + "images/stars-icon.png",
-                                    sound: qmlPath + "sounds/karneval/jetzt-geht-los.ogg",
-                                    playing: false,
-                                    set: "Kölner Karneval"
-                                })
-            menuButtons.append({ btnId: "momentBtn",
-                                   name: "Moment Moment Moment",
-                                   colour: "red",
-                                   bicon: qmlPath + "images/blumen-icon.png",
-                                   sound: qmlPath + "sounds/karneval/moment-moment-moment.ogg",
-                                   playing: false,
-                                   set: "Kölner Karneval"
-                               })
-            menuButtons.append({ btnId: "alaafBtn",
-                                   name: "Kölle Alaaf",
-                                   colour: "blue",
-                                   bicon: qmlPath + "images/trommel-icon.png",
-                                   sound: qmlPath + "sounds/karneval/kölle_alaaf.ogg",
-                                   playing: false,
-                                   set: "Kölner Karneval"
-                               })
-            menuButtons.append({ btnId: "herzBtn",
-                                   name: "Schenk mir dein Herz",
-                                   colour: "green",
-                                   bicon: qmlPath + "images/heart-icon.png",
-                                   sound: qmlPath + "sounds/karneval/schenk-mir-dein-herz.ogg",
-                                   playing: false,
-                                   set: "Kölner Karneval"
-                               })
-            menuButtons.append({ btnId: "ohohohieoBtn",
-                                   name: "Oh oh oh - ieeeeeeooo",
-                                   colour: "yellow",
-                                   bicon: qmlPath + "images/konfetti-icon.png",
-                                   sound: qmlPath + "sounds/karneval/ohohoh-ieo.ogg",
-                                   playing: false,
-                                   set: "Kölner Karneval"
-                               })
-            menuButtons.append({ btnId: "byebyeBtn",
-                                   name: "Bye bye my love",
-                                   colour: "orange",
-                                   bicon: qmlPath + "images/bye-icon.png",
-                                   sound: qmlPath + "sounds/karneval/bye-bye-my-love.ogg",
-                                   playing: false,
-                                   set: "Kölner Karneval"
-                               })
-        }
-        else {
-            DB.getSounds(page,soundboardName);
-        }
-    }
-
-    SilicaGridView {
-        id: grid
-        width: parent.width
-        height: page.height - setName.height
-
-        PullDownMenu {
-            id: pulley
-            MenuItem {
-                text: qsTr("About ") + appname
-                onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"));
-            }
-            MenuItem {
-                text: qsTr("New Soundboard")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("SecondPage.qml"));
-                }
-            }
-            MenuItem {
-                text: qsTr("Show Soundboards")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("SoundBoardList.qml"));
-                }
-            }
-            MenuItem {
-                text: qsTr("Save Soundboard")
-                onClicked: {
-                    // TODO db save stuff call
-                    // addToSoundset(btnId,name,colour,bicon,sound,playing,sset)
-                    for (var i=0; i<menuButtons.count; i++) {
-                        DB.addToSoundset(menuButtons.get(i).btnId,menuButtons.get(i).name,menuButtons.get(i).colour,menuButtons.get(i).bicon,menuButtons.get(i).sound,false,soundboardName)
-                    }
-                }
-                visible:  {
-                    if (soundboardName != "Kölner Karneval") return true
-                    else return false
-                }
-            }
-        }
-        property PageHeader pageHeader
-
-        header: PageHeader {
-            id: pageHeader
-            title: "Tuschbox"
-            Component.onCompleted: grid.pageHeader = pageHeader
-        }
-
-        cellWidth: {
-            if (page.orientation == Orientation.PortraitInverted || page.orientation == Orientation.Portrait)
-                page.width / 2
-            else
-                page.width / 4
-        }
-        cellHeight: {
-            if (page.orientation == Orientation.PortraitInverted || page.orientation == Orientation.Portrait)
-                (page.height / 3) - pageHeader.height / 2
-            else
-                (page.height / 2) - pageHeader.height / 2
-        }
-        //model: menuButtons
-        delegate: menuButtonsDelegate
-        snapMode: GridView.SnapToRow
-        populate: Transition {
-            NumberAnimation { properties: "x,y"; duration: 400 }
-        }
-        Component.onCompleted: {
-            grid.model = menuButtons
-        }
-    }
-
     ListModel {
-        id: menuButtons
-
-        // 7 Items
-
-        function setButton(uid, color, text, icon, mfile) {
-            for (var i=0; i<count; i++) {
-                if (get(i).btnId === uid) set(i,{"name":text, "colour":color, "bicon": icon, "sound": mfile});
-            }
-        }
+        id: boardLists
     }
 
-    Component {
-        id: menuButtonsDelegate
-        ItemButton {
-            id: historyBtn
-            width: grid.cellWidth
-            height: grid.cellHeight
-            text: qsTr(name)
-            _playing: playing
-            function play() {
-                menuButtons.set(index, {"playing" : true})
-                player.source = sound
-                player.play()
-            }
+    SilicaListView {
+        id: listView
+        anchors.fill: parent
+        header: PageHeader {
+            id: head
+            title: qsTr("Soundboard List")
+        }
+        model: boardLists
+        delegate: BackgroundItem {
+            width: listView.width
+            contentHeight: Theme.itemSizeSmall
 
             onClicked: {
-                if (player.playbackState == MediaPlayer.PlayingState) {
-                    if (menuButtons.get(index).playing != true) {
-                        player.stop()
-                        play()
-                    }
-                    else player.stop()
-                }
-                else if (playing == false) {
-                    // console.debug("[FirstPage.qml] Clicked button " + btnId + " to play " + sound)
-                    play()
-                }
-            }
-            onPressAndHold: {
-                if (player.playbackState == MediaPlayer.PlayingState) {
-                    player.stop()
-                }
-                var editButton = pageStack.push(Qt.resolvedUrl("EditButton.qml"),{ "uid" : btnId , "color": colour, "text": name, "icon" : bicon, "mfile": sound, "soundSet" : set });
-                editButton.accepted.connect(function() {
-                    menuButtons.setButton(editButton.uid.toString(), editButton.color.toString(), editButton.text, editButton.icon.toString(), editButton.mfile)
-                })
+                console.log(sset + " clicked!")
             }
 
-            color: colour
-            icon: Qt.resolvedUrl(bicon)
-        }
-    }
-
-    MediaPlayer {
-        id: player
-        onStopped: {
-            for (var i=0; i<menuButtons.count; i++) {
-                menuButtons.set(i, {"playing" : false})
+            Label {
+                text: sset
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+                anchors.leftMargin: Theme.paddingMedium
+                color: highlighted ? Theme.highlightColor : Theme.primaryColor
             }
         }
     }
 
-    SectionHeader {
-        id: setName
-        anchors.bottom: page.bottom
+    Component.onCompleted: {
+        DB.getSoundBoards(soundBoardList)
     }
 
 }
-
-
