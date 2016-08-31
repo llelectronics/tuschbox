@@ -686,7 +686,7 @@ ApplicationWindow
 
     property QtObject fPage
     //initialPage: Component { FirstPage { } }
-    cover: Qt.resolvedUrl("cover/CoverPage.qml")
+    cover: undefined
     allowedOrientations: Orientation.All
     _defaultPageOrientations: Orientation.All
 
