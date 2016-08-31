@@ -84,7 +84,7 @@ function getSounds(page,sset) {
     var respath="";
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM soundsets WHERE sset=(?);', [sset]);
-        if (rs.rowsAffected > 0) {
+        if (rs.rows.length > 0) {
             console.debug("Found sset:" + sset)
             addSoundBtn(page,rs)
         } else {

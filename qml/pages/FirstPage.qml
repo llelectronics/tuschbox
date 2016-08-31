@@ -764,6 +764,7 @@ Page {
                                })
         }
         else {
+            console.debug("Try loading soundboard: " + soundboardName)
             DB.getSounds(page,soundboardName);
         }
     }

@@ -707,7 +707,8 @@ Page {
             contentHeight: Theme.itemSizeSmall
 
             onClicked: {
-                console.log(sset + " clicked!")
+                //console.log(sset + " clicked!");
+                mainWindow.createSoundPage(sset);
             }
 
             Label {
