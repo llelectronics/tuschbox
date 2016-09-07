@@ -49,6 +49,10 @@
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FirstPage</name>
@@ -68,11 +72,19 @@
         <source>Show Soundboards</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Add Soundbbutton</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OpenDialog</name>
     <message>
-        <source>Open file</source>
+        <source>Deleting </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

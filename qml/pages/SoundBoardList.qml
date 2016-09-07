@@ -721,6 +721,8 @@ Page {
         }
     }
 
+    RemorsePopup { id: remorse }
+
     Component.onCompleted: {
         DB.getSoundBoards(soundBoardList)
     }

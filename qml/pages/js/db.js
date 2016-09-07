@@ -27,7 +27,7 @@ function initialize() {
                     //                           playing: false,
                     //                           set: "Kölner Karneval"
 
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS soundsets(btnId TEXT, name TEXT, colour TEXT, bicon TEXT, sound TEXT, playing TEXT, sset TEXT)');
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS soundsets(btnId TEXT, name TEXT, colour TEXT, bicon TEXT, sound TEXT, playing TEXT, sset TEXT, UNIQUE(btnId, sset))');
                     var table  = tx.executeSql("SELECT * FROM soundsets");
                     // Insert template soundset if no soundsets are set / empty soundsets db
                     if (table.rows.length === 0) {
@@ -66,7 +66,19 @@ function addToSoundset(btnId,name,colour,bicon,sound,playing,sset) {
 }
 
 // This function is used to remove a soundset from database
-function removeSoundset(btnId,sset) {
+function removeSoundset(sset) {
+    var db = getDatabase();
+    var respath="";
+    db.transaction(function(tx) {
+        var rs = tx.executeSql('DELETE FROM soundsets WHERE sset=(?);', [sset]);
+        //        if (rs.rowsAffected > 0) {
+        //            console.debug("Url found and removed");
+        //        } else {
+        //            console.debug("Url not found");
+        //        }
+    })
+}
+function removeFromSoundset(btnId,sset) {
     var db = getDatabase();
     var respath="";
     db.transaction(function(tx) {
@@ -102,7 +114,9 @@ function getSoundBoards(page) {
     db.transaction(function(tx) {
         var rs = tx.executeSql('SELECT DISTINCT sset FROM soundsets;');
         for (var i = 0; i < rs.rows.length; i++) {
-            page.addSoundBards(rs.rows.item(i).sset)
+            if (rs.rows.item(i).sset != "temp") {
+                page.addSoundBards(rs.rows.item(i).sset)
+            }
         }
     })
 }

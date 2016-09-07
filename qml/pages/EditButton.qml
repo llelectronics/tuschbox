@@ -691,6 +691,7 @@ Dialog {
     property int position
     property string uid
     property string soundSet
+    property QtObject parentPage
 
 
     function findBaseNameFull(url) {
@@ -818,13 +819,25 @@ Dialog {
             }
         }
 
+        Button {
+            visible: soundSet != "Kölner Karneval"
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: Theme.paddingMedium
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: qsTr("Delete")
+            onClicked: {
+                parentPage.menuButtons.removeButton(uid)
+                pageStack.pop()
+            }
+        }
+
         Component {
             id: openFileComponent
             OpenDialog {
                 title: qsTr("Select Soundfile")
                 path: _fm.getHome()
                 filter: ["*.mp3", "*.wav", "*.ogg", "*.flac", "*.m4a", "*.oga", "*.wma"]
-                onOpenFile: {
+                onFileOpen: {
                     mfile = path;
                     pageStack.pop();
                 }

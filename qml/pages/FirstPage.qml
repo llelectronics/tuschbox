@@ -687,6 +687,7 @@ Page {
 
     property alias soundboardName: setName.text
     property alias mplayer: player
+    property alias menuButtons: menuButtons
 
     function addSoundButton(btnId, name, colour, bicon, sound, playing, set) {
         menuButtons.append({ "btnId": btnId,
@@ -697,6 +698,15 @@ Page {
                                "playing": playing,
                                "set": set
                            })
+    }
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++ ) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
     }
 
     Component.onCompleted: {
@@ -715,13 +725,13 @@ Page {
                                    set: "Kölner Karneval"
                                })
             menuButtons.append({ btnId: "jetztgehtsLosBtn",
-                                    name: "Jetzt gehts los",
-                                    colour: "brown",
-                                    bicon: qmlPath + "images/stars-icon.png",
-                                    sound: qmlPath + "sounds/karneval/jetzt-geht-los.ogg",
-                                    playing: false,
-                                    set: "Kölner Karneval"
-                                })
+                                   name: "Jetzt gehts los",
+                                   colour: "brown",
+                                   bicon: qmlPath + "images/stars-icon.png",
+                                   sound: qmlPath + "sounds/karneval/jetzt-geht-los.ogg",
+                                   playing: false,
+                                   set: "Kölner Karneval"
+                               })
             menuButtons.append({ btnId: "momentBtn",
                                    name: "Moment Moment Moment",
                                    colour: "red",
@@ -771,8 +781,7 @@ Page {
 
     SilicaGridView {
         id: grid
-        width: parent.width
-        height: page.height - setName.height
+        anchors.fill: parent
 
         PullDownMenu {
             id: pulley
@@ -807,6 +816,38 @@ Page {
                 }
             }
         }
+
+        PushUpMenu {
+            id: pushey
+            MenuItem {
+                text: qsTr("Add Soundbbutton")
+                onClicked: {
+                    // "sBtn7", "Empty", "violet", qmlPath + "images/bye-icon.png", "empty", "false", "temp"
+                    var BtnName = "sBtn"
+                    var BtnNumber = eval(menuButtons.count+1)
+                    var newBtnId = BtnName + BtnNumber
+                    while (menuButtons.exists(newBtnId)) {
+                        console.debug(newBtnId + " exists already")
+                        BtnNumber = eval(BtnNumber+1)
+                        newBtnId = BtnName + BtnNumber
+                    }
+                    console.debug("Add Button with btnId: " + newBtnId)
+                    menuButtons.append({ btnId: newBtnId,
+                                           name: "Empty",
+                                           colour: page.getRandomColor(),
+                                           bicon: DB.qmlPath + "images/ladybug-icon.png",
+                                           sound: "empty",
+                                           playing: false,
+                                           set: soundboardName
+                                       })
+                }
+            }
+            visible:  {
+                if (soundboardName != "Kölner Karneval") return true
+                else return false
+            }
+        }
+
         property PageHeader pageHeader
 
         header: PageHeader {
@@ -840,7 +881,7 @@ Page {
 
     ListModel {
         id: menuButtons
-
+        property int currentIndex
         // 7 Items
 
         function setButton(uid, color, text, icon, mfile) {
@@ -848,7 +889,25 @@ Page {
                 if (get(i).btnId === uid) set(i,{"name":text, "colour":color, "bicon": icon, "sound": mfile});
             }
         }
+
+        function removeButton(uid) {
+            for (var i=0; i<count; i++) {
+                if (get(i).btnId === uid) {
+                    menuButtons.currentIndex = i
+                    remorse.execute("Remove " + get(i).name, function() { DB.removeFromSoundset(get(currentIndex).btnId,get(currentIndex).set); remove(currentIndex); } )
+                }
+            }
+        }
+
+        function exists(uid) {
+            for (var i=0; i<count; i++) {
+                if (get(i).btnId === uid) return true
+            }
+            return false
+        }
     }
+
+    RemorsePopup { id: remorse }
 
     Component {
         id: menuButtonsDelegate
@@ -881,7 +940,7 @@ Page {
                 if (player.playbackState == MediaPlayer.PlayingState) {
                     player.stop()
                 }
-                var editButton = pageStack.push(Qt.resolvedUrl("EditButton.qml"),{ "uid" : btnId , "color": colour, "text": name, "icon" : bicon, "mfile": sound, "soundSet" : set });
+                var editButton = pageStack.push(Qt.resolvedUrl("EditButton.qml"),{ "uid" : btnId , "color": colour, "text": name, "icon" : bicon, "mfile": sound, "soundSet" : soundboardName, "parentPage": page });
                 editButton.accepted.connect(function() {
                     menuButtons.setButton(editButton.uid.toString(), editButton.color.toString(), editButton.text, editButton.icon.toString(), editButton.mfile)
                 })
