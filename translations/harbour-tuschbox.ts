@@ -78,6 +78,13 @@
     </message>
 </context>
 <context>
+    <name>IconList</name>
+    <message>
+        <source>Icons</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OpenDialog</name>
     <message>
         <source>Deleting </source>

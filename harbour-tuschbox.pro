@@ -50,7 +50,8 @@ DISTFILES += \
     qml/pages/js/db.js \
     qml/pages/EditButton.qml \
     qml/pages/OpenDialog.qml \
-    qml/pages/SoundBoardList.qml
+    qml/pages/SoundBoardList.qml \
+    qml/pages/IconList.qml
 
 HEADERS += \
     src/folderlistmodel/fileinfothread_p.h \

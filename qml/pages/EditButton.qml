@@ -679,6 +679,8 @@ Public License instead of this License.  But first, please read
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+import "js/db.js" as DB
+
 Dialog {
     id: editPage
 
@@ -693,16 +695,20 @@ Dialog {
     property string soundSet
     property QtObject parentPage
 
-
-    function findBaseNameFull(url) {
-        var fileName = url.substring(url.lastIndexOf('/') + 1);
-        return fileName
-    }
-
     onMfileChanged: {
-        soundPath.text = findBaseNameFull(mfile)
+        soundPath.text = mainWindow.findBaseNameFull(mfile)
     }
 
+    function loadDefaultIcons(iconPage) {
+        iconPage.addIcon(DB.qmlPath + "images/mask-icon.png")
+        iconPage.addIcon(DB.qmlPath + "images/stars-icon.png")
+        iconPage.addIcon(DB.qmlPath + "images/blumen-icon.png")
+        iconPage.addIcon(DB.qmlPath + "images/trommel-icon.png")
+        iconPage.addIcon(DB.qmlPath + "images/heart-icon.png")
+        iconPage.addIcon(DB.qmlPath + "images/konfetti-icon.png")
+        iconPage.addIcon(DB.qmlPath + "images/bye-icon.png")
+        iconPage.addIcon(DB.qmlPath + "images/ladybug-icon.png")
+    }
 
     SilicaFlickable {
         id: flick
@@ -724,6 +730,17 @@ Dialog {
             height: width
             onSourceChanged: {
                 console.debug("Logo: " + source)
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    var iconPage = pageStack.push(Qt.resolvedUrl("IconList.qml"),{ "parentPage" : editPage });
+                    iconPage.iconClicked.connect(function(iconPath) {
+                        logo.source = iconPath
+                        pageStack.pop()
+                    }
+                    )
+                }
             }
             // TODO: Click on logo should bring up logo chooser
         }

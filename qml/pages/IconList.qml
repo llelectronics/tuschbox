@@ -678,42 +678,69 @@ Public License instead of this License.  But first, please read
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "pages"
 
-ApplicationWindow
-{
-    id: mainWindow
+import "js/db.js" as DB
 
-    property QtObject fPage
-    //initialPage: Component { FirstPage { } }
-    cover: undefined
-    allowedOrientations: Orientation.All
-    _defaultPageOrientations: Orientation.All
+Page {
+    id: iconList
 
-    property string version: "1.0"
-    property string appname: "Tuschbox"
-    property string appicon: "images/icon.png"
+    signal iconClicked(string path)
+    property QtObject parentPage
 
-    function createSoundPage(name) {
-        pageStack.replace("pages/FirstPage.qml",{soundboardName: name})
+    function addIcon(path) {
+        iconLists.append({
+                               "icon": path
+                           })
     }
 
-    // Full Basename with extension
-    function findBaseNameFull(url) {
-        var fileName = url.substring(url.lastIndexOf('/') + 1);
-        return fileName
+    ListModel {
+        id: iconLists
     }
 
-    // Basename without extension
-    function findBaseName(url) {
-        var fileName = url.substring(url.lastIndexOf('/') + 1);
-        var dot = fileName.lastIndexOf('.');
-        return dot == -1 ? fileName : fileName.substring(0, dot);
+    SilicaListView {
+        id: listView
+        anchors.fill: parent
+        header: PageHeader {
+            id: head
+            title: qsTr("Icons")
+        }
+        model: iconLists
+        delegate: BackgroundItem {
+            width: listView.width
+            contentHeight: Theme.itemSizeMedium
+
+            onClicked: {
+                //console.log(icon + " clicked!");
+                iconClicked(icon)
+            }
+
+            Image {
+                id: iconImage
+                height: parent.height - Theme.paddingLarge
+                width: height
+                anchors.left: parent.left
+                anchors.leftMargin: Theme.paddingMedium
+                source: icon
+            }
+
+            Label {
+                text: mainWindow.findBaseName(icon)
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: iconImage.right
+                anchors.leftMargin: Theme.paddingMedium
+                color: highlighted ? Theme.highlightColor : Theme.primaryColor
+            }
+        }
     }
+
+    RemorsePopup { id: remorse }
 
     Component.onCompleted: {
-        createSoundPage("default")
+        // Load default icons first
+        parentPage.loadDefaultIcons(iconList)
+        // Try to find saved Icon Paths in the database
+        // TODO: Implement in database
+        //DB.getsavedIconPaths(iconList)
     }
+
 }
-
-
