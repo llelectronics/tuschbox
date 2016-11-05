@@ -51,7 +51,20 @@ DISTFILES += \
     qml/pages/EditButton.qml \
     qml/pages/OpenDialog.qml \
     qml/pages/SoundBoardList.qml \
-    qml/pages/IconList.qml
+    qml/pages/IconList.qml \
+    qml/pages/images/blumen-icon.png \
+    qml/pages/images/bye-icon.png \
+    qml/pages/images/heart-icon.png \
+    qml/pages/images/icon.png \
+    qml/pages/images/konfetti-icon.png \
+    qml/pages/images/ladybug-icon.png \
+    qml/pages/images/trommel-icon.png \
+    qml/pages/images/mask-icon.svg \
+    qml/pages/sounds/karneval/bye-bye-my-love.ogg \
+    qml/pages/sounds/karneval/kölle_alaaf.ogg \
+    qml/pages/sounds/karneval/moment-moment-moment.ogg \
+    qml/pages/sounds/karneval/ohohoh-ieo.ogg \
+    qml/pages/sounds/karneval/schenk-mir-dein-herz.ogg
 
 HEADERS += \
     src/folderlistmodel/fileinfothread_p.h \
