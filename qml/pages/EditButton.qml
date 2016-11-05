@@ -697,6 +697,7 @@ Dialog {
 
     onMfileChanged: {
         soundPath.text = mainWindow.findBaseNameFull(mfile)
+        buttonText.text = mainWindow.findBaseName(mfile)
     }
 
     function loadDefaultIcons(iconPage) {
