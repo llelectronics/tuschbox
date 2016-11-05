@@ -703,25 +703,64 @@ Page {
         }
         model: boardLists
         delegate: BackgroundItem {
+            id: bgdelegate
             width: listView.width
-            contentHeight: Theme.itemSizeSmall
+            height: menuOpen ? contextMenu.height + Theme.itemSizeSmall : Theme.itemSizeSmall
+            property Item contextMenu
+            property bool menuOpen: contextMenu != null && contextMenu.parent === bgdelegate
 
-            onClicked: {
-                //console.log(sset + " clicked!");
-                mainWindow.createSoundPage(sset);
+            function remove() {
+                var removal = removalComponent.createObject(bgdelegate)
+                removal.execute(delegate,qsTr("Deleting ") + sset, function() { DB.removeSoundset(sset); boardLists.clear(); DB.getSoundBoards(soundBoardList) })
             }
 
-            Label {
-                text: sset
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
-                anchors.leftMargin: Theme.paddingMedium
-                color: highlighted ? Theme.highlightColor : Theme.primaryColor
+            ListItem {
+                id: delegate
+
+                showMenuOnPressAndHold: false
+                menu: myMenu
+
+                function showContextMenu() {
+                    if (!contextMenu)
+                        contextMenu = myMenu.createObject(listView)
+                    contextMenu.show(bgdelegate)
+                }
+
+                Label {
+                    text: sset
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: Theme.paddingMedium
+                    color: highlighted ? Theme.highlightColor : Theme.primaryColor
+                }
+                onClicked: {
+                    //console.log(sset + " clicked!");
+                    mainWindow.createSoundPage(sset);
+                }
+                onPressAndHold: showContextMenu()
+            }
+
+            Component {
+                id: removalComponent
+                RemorseItem {
+                    id: remorse
+                    onCanceled: destroy()
+                }
+            }
+
+            Component {
+                id: myMenu
+                ContextMenu {
+                    MenuItem {
+                        text: qsTr("Delete")
+                        onClicked: {
+                            bgdelegate.remove();
+                        }
+                    }
+                }
             }
         }
     }
-
-    RemorsePopup { id: remorse }
 
     Component.onCompleted: {
         DB.getSoundBoards(soundBoardList)
