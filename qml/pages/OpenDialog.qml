@@ -90,11 +90,11 @@ Page {
             }
             MenuItem {
                 text: "Show Android SDCard"
-                onClicked: fileModel.folder = _fm.getRoot() + "/data/sdcard";
+                onClicked: fileModel.folder = _fm.getHome() + "android_storage";
             }
             MenuItem {
                 text: "Show SDCard"
-                onClicked: fileModel.folder = _fm.getRoot() + "/media/sdcard";
+                onClicked: fileModel.folder = _fm.getRoot() + "media/sdcard";
             }
         }
 

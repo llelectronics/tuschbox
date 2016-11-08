@@ -5,7 +5,7 @@
     <name>AboutPage</name>
     <message>
         <source>A simple soundboard application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine einfache Soundboard Anwendung.</translation>
     </message>
 </context>
 <context>
@@ -19,62 +19,62 @@
     <name>EditButton</name>
     <message>
         <source>Edit Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Button bearbeiten</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel</translation>
     </message>
     <message>
         <source>Soundfile</source>
-        <translation type="unfinished"></translation>
+        <translation>Sounddatei</translation>
     </message>
     <message>
         <source>Choose Soundfile</source>
-        <translation type="unfinished"></translation>
+        <translation>Sounddatei auswählen</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Abspielen</translation>
     </message>
     <message>
         <source>Select Soundfile</source>
-        <translation type="unfinished"></translation>
+        <translation>Sounddatei auswählen</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Stop</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
         <source>About </source>
-        <translation type="unfinished"></translation>
+        <translation>Über </translation>
     </message>
     <message>
         <source>New Soundboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Soundboard</translation>
     </message>
     <message>
         <source>Save Soundboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Soundboard speichern</translation>
     </message>
     <message>
         <source>Show Soundboards</source>
-        <translation type="unfinished"></translation>
+        <translation>Soundboards anzeigen</translation>
     </message>
     <message>
         <source>Add Soundbbutton</source>
-        <translation type="unfinished"></translation>
+        <translation>Soundbutton hinzufügen</translation>
     </message>
 </context>
 <context>
@@ -88,45 +88,45 @@
     <name>OpenDialog</name>
     <message>
         <source>Deleting </source>
-        <translation type="unfinished"></translation>
+        <translation>Lösche </translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
 </context>
 <context>
     <name>SecondPage</name>
     <message>
         <source>Create</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstellen</translation>
     </message>
     <message>
         <source>Create new Soundboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstelle neues Soundboard</translation>
     </message>
     <message>
         <source>Name of the new soundboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Name des neuen Soundboards</translation>
     </message>
     <message>
         <source>Soundboard Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Soundboard Name</translation>
     </message>
 </context>
 <context>
     <name>SoundBoardList</name>
     <message>
         <source>Soundboard List</source>
-        <translation type="unfinished"></translation>
+        <translation>Soundboardliste</translation>
     </message>
     <message>
         <source>Deleting </source>
-        <translation type="unfinished"></translation>
+        <translation>Lösche </translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
 </context>
 </TS>
