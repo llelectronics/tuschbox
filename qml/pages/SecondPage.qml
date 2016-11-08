@@ -720,6 +720,8 @@ Dialog {
                 else newSoundBoardDialog.canAccept = false
             }
         }
+        Keys.onEnterPressed: newSoundBoardDialog.accept();
+        Keys.onReturnPressed: newSoundBoardDialog.accept();
     }
 }
 

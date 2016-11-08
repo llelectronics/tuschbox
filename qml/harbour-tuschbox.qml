@@ -690,7 +690,7 @@ ApplicationWindow
     allowedOrientations: Orientation.All
     _defaultPageOrientations: Orientation.All
 
-    property string version: "1.0"
+    property string version: "1.1"
     property string appname: "Tuschbox"
     property string appicon: "images/icon.png"
 

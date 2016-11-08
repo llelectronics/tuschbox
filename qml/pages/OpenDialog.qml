@@ -90,7 +90,7 @@ Page {
             }
             MenuItem {
                 text: "Show Android SDCard"
-                onClicked: fileModel.folder = _fm.getHome() + "android_storage";
+                onClicked: fileModel.folder = _fm.getHome() + "/android_storage";
             }
             MenuItem {
                 text: "Show SDCard"

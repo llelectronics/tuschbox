@@ -64,7 +64,11 @@ DISTFILES += \
     qml/pages/sounds/karneval/kölle_alaaf.ogg \
     qml/pages/sounds/karneval/moment-moment-moment.ogg \
     qml/pages/sounds/karneval/ohohoh-ieo.ogg \
-    qml/pages/sounds/karneval/schenk-mir-dein-herz.ogg
+    qml/pages/sounds/karneval/schenk-mir-dein-herz.ogg \
+    qml/pages/images/koelner_karneval-icon.png \
+    qml/pages/images/koelsch-icon.png \
+    qml/pages/images/luftballons-icon.png \
+    qml/pages/images/rakete-icon.png
 
 HEADERS += \
     src/folderlistmodel/fileinfothread_p.h \

@@ -709,6 +709,10 @@ Dialog {
         iconPage.addIcon(DB.qmlPath + "images/konfetti-icon.png")
         iconPage.addIcon(DB.qmlPath + "images/bye-icon.png")
         iconPage.addIcon(DB.qmlPath + "images/ladybug-icon.png")
+        iconPage.addIcon(DB.qmlPath + "images/koelner_karneval-icon.png")
+        iconPage.addIcon(DB.qmlPath + "images/koelsch-icon.png")
+        iconPage.addIcon(DB.qmlPath + "images/luftballons-icon.png")
+        iconPage.addIcon(DB.qmlPath + "images/rakete-icon.png")
     }
 
     SilicaFlickable {
