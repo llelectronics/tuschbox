@@ -51,6 +51,16 @@ int main(int argc, char *argv[])
     QGuiApplication *app = SailfishApp::application(argc, argv);
     app->setApplicationVersion("1.0");
 
+    // install translator
+    QTranslator translator;
+    QLocale locale;
+    if (translator.load(locale.name(), SailfishApp::pathTo("translations").toLocalFile())) {
+      app->installTranslator(&translator);
+    } else {
+      qWarning() << "Can't load translator for locale" << locale << "/" << locale.name() <<
+                    "(" << SailfishApp::pathTo("translations").toLocalFile() << ")";
+    }
+
     qmlRegisterType<QQuickFolderListModel>("harbour.tuschbox.Tuschbox", 1, 0, "FolderListModel");
 
     QQuickView *view = SailfishApp::createView(); // I get a white background with this.

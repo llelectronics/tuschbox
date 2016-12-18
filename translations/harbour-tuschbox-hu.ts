@@ -31,7 +31,7 @@
     <name>EditButton</name>
     <message>
         <source>Edit Button</source>
-        <translation>Szerkesztés gomb</translation>
+        <translation>Gomb szerkesztése</translation>
     </message>
     <message>
         <source>Title</source>
@@ -63,15 +63,11 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation>Törlés</translation>
+        <translation>Gomb törlése</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
-    <message>
-        <source>About </source>
-        <translation>Az alkalmazásról  </translation>
-    </message>
     <message>
         <source>New Soundboard</source>
         <translation>Új panel</translation>
@@ -88,6 +84,14 @@
         <source>Add Soundbbutton</source>
         <translation>Gomb hozzáadása</translation>
     </message>
+    <message>
+        <source>About %1</source>
+        <translation>A %1ról</translation>
+    </message>
+    <message>
+        <source>Remove %1</source>
+        <translation>%1 törlésre kerül </translation>
+    </message>
 </context>
 <context>
     <name>IconList</name>
@@ -99,19 +103,19 @@
 <context>
     <name>OpenDialog</name>
     <message>
-        <source>Deleting </source>
-        <translation>Törlés  </translation>
+        <source>Delete</source>
+        <translation>Gomb törlése</translation>
     </message>
     <message>
-        <source>Delete</source>
-        <translation>Törlés</translation>
+        <source>Deleting %1</source>
+        <translation>%1 törlésre kerül</translation>
     </message>
 </context>
 <context>
     <name>SecondPage</name>
     <message>
         <source>Create</source>
-        <translation>Új</translation>
+        <translation>Létrehozás</translation>
     </message>
     <message>
         <source>Create new Soundboard</source>
@@ -133,12 +137,19 @@
         <translation>Panelek</translation>
     </message>
     <message>
-        <source>Deleting </source>
-        <translation>Törlés </translation>
+        <source>Delete</source>
+        <translation>Panel törlése</translation>
     </message>
     <message>
-        <source>Delete</source>
-        <translation>Törlés</translation>
+        <source>Deleting %1</source>
+        <translation>A(z) %1 panel törlésre kerül</translation>
+    </message>
+</context>
+<context>
+    <name>harbour-tuschbox</name>
+    <message>
+        <source>Tuschbox</source>
+        <translation>Zenedoboz</translation>
     </message>
 </context>
 </TS>

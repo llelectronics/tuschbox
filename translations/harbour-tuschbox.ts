@@ -7,6 +7,18 @@
         <source>A simple soundboard application.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>License: GPL (Version 3)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Created by llelectronics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;a href=&quot;https://github.com/llelectronics/tuschbox&quot;&gt;Sourcecode on Github&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>
@@ -57,10 +69,6 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <source>About </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>New Soundboard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -76,6 +84,14 @@
         <source>Add Soundbbutton</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>About %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IconList</name>
@@ -87,11 +103,11 @@
 <context>
     <name>OpenDialog</name>
     <message>
-        <source>Deleting </source>
+        <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete</source>
+        <source>Deleting %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -121,11 +137,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Deleting </source>
+        <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete</source>
+        <source>Deleting %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>harbour-tuschbox</name>
+    <message>
+        <source>Tuschbox</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
