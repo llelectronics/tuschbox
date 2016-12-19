@@ -857,10 +857,11 @@ Dialog {
             id: openFileComponent
             OpenDialog {
                 title: qsTr("Select Soundfile")
-                path: _fm.getHome()
+                path: settings.value("lastFolder", _fm.getHome())
                 filter: ["*.mp3", "*.wav", "*.ogg", "*.flac", "*.m4a", "*.oga", "*.wma"]
                 onFileOpen: {
                     mfile = path;
+                    settings.setValue("lastFolder", _fm.getPath(path));
                     pageStack.pop();
                 }
             }

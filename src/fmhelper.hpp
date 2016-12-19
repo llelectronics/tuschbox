@@ -50,6 +50,13 @@ class FM : public QObject
                 mime = db.mimeTypeForFile(filename.mid(idx, regex.matchedLength()));
             return mime.name();
         }
+
+        QString getPath(const QString &path)
+        {
+            QFileInfo fi;
+            fi.setFile(path);
+            return fi.path();
+        }
 };
 
 

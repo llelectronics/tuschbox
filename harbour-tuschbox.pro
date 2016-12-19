@@ -16,7 +16,8 @@ CONFIG += sailfishapp
 
 SOURCES += src/harbour-tuschbox.cpp \
     src/folderlistmodel/fileinfothread.cpp \
-    src/folderlistmodel/qquickfolderlistmodel.cpp
+    src/folderlistmodel/qquickfolderlistmodel.cpp \
+    src/settings.cpp
 
 OTHER_FILES += qml/harbour-tuschbox.qml \
     qml/cover/CoverPage.qml \
@@ -75,7 +76,8 @@ HEADERS += \
     src/folderlistmodel/fileinfothread_p.h \
     src/folderlistmodel/fileproperty_p.h \
     src/folderlistmodel/qquickfolderlistmodel.h \
-    src/fmhelper.hpp
+    src/fmhelper.hpp \
+    src/settings.h
 
 lupdate_only{
 SOURCES =   qml/*.qml \
