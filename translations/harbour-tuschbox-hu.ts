@@ -1,155 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.0" language="hu_HU">
 <context>
     <name>AboutPage</name>
     <message>
         <source>A simple soundboard application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Egy letisztult zenedoboz alkalmazás.</translation>
     </message>
     <message>
         <source>License: GPL (Version 3)</source>
-        <translation type="unfinished"></translation>
+        <translation>Licensz: GPL (V3)</translation>
     </message>
     <message>
         <source>Created by llelectronics</source>
-        <translation type="unfinished"></translation>
+        <translation>Készítette: llelectronics</translation>
     </message>
     <message>
         <source>&lt;a href=&quot;https://github.com/llelectronics/tuschbox&quot;&gt;Sourcecode on Github&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://github.com/llelectronics/tuschbox&quot;&gt;Forráskód a Github-on&lt;/a&gt;</translation>
     </message>
 </context>
 <context>
     <name>CoverPage</name>
     <message>
         <source>My Cover</source>
-        <translation type="unfinished"></translation>
+        <translation>Borítóm</translation>
     </message>
 </context>
 <context>
     <name>EditButton</name>
     <message>
         <source>Edit Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Gomb szerkesztése</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Cím</translation>
     </message>
     <message>
         <source>Soundfile</source>
-        <translation type="unfinished"></translation>
+        <translation>Hangfájl</translation>
     </message>
     <message>
         <source>Choose Soundfile</source>
-        <translation type="unfinished"></translation>
+        <translation>Hangfájl kiválasztása</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Lejátszás</translation>
     </message>
     <message>
         <source>Select Soundfile</source>
-        <translation type="unfinished"></translation>
+        <translation>Hangfájl kiválasztása</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Leállítás</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Mentés</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Gomb törlése</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
         <source>New Soundboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Új panel</translation>
     </message>
     <message>
         <source>Save Soundboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Panel mentése</translation>
     </message>
     <message>
         <source>Show Soundboards</source>
-        <translation type="unfinished"></translation>
+        <translation>Panel kiválasztása</translation>
     </message>
     <message>
         <source>Add Soundbbutton</source>
-        <translation type="unfinished"></translation>
+        <translation>Gomb hozzáadása</translation>
     </message>
     <message>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>A %1ról</translation>
     </message>
     <message>
         <source>Remove %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 törlésre kerül </translation>
     </message>
 </context>
 <context>
     <name>IconList</name>
     <message>
         <source>Icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikonok</translation>
     </message>
 </context>
 <context>
     <name>OpenDialog</name>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Gomb törlése</translation>
     </message>
     <message>
         <source>Deleting %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 törlésre kerül</translation>
     </message>
 </context>
 <context>
     <name>SecondPage</name>
     <message>
         <source>Create</source>
-        <translation type="unfinished"></translation>
+        <translation>Létrehozás</translation>
     </message>
     <message>
         <source>Create new Soundboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Új zenedoboz panel</translation>
     </message>
     <message>
         <source>Name of the new soundboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Új panel neve</translation>
     </message>
     <message>
         <source>Soundboard Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Panel neve</translation>
     </message>
 </context>
 <context>
     <name>SoundBoardList</name>
     <message>
         <source>Soundboard List</source>
-        <translation type="unfinished"></translation>
+        <translation>Panelek</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Panel törlése</translation>
     </message>
     <message>
         <source>Deleting %1</source>
-        <translation type="unfinished"></translation>
+        <translation>A(z) %1 panel törlésre kerül</translation>
     </message>
 </context>
 <context>
     <name>harbour-tuschbox</name>
     <message>
         <source>Tuschbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Zenedoboz</translation>
     </message>
 </context>
 </TS>

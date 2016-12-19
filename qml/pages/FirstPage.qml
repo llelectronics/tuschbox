@@ -786,7 +786,7 @@ Page {
         PullDownMenu {
             id: pulley
             MenuItem {
-                text: qsTr("About ") + appname
+                text: qsTr("About %1").arg(appname)
                 onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"));
             }
             MenuItem {
@@ -852,7 +852,7 @@ Page {
 
         header: PageHeader {
             id: pageHeader
-            title: "Tuschbox"
+            title: appname
             Component.onCompleted: grid.pageHeader = pageHeader
         }
 
@@ -894,7 +894,7 @@ Page {
             for (var i=0; i<count; i++) {
                 if (get(i).btnId === uid) {
                     menuButtons.currentIndex = i
-                    remorse.execute("Remove " + get(i).name, function() { DB.removeFromSoundset(get(currentIndex).btnId,get(currentIndex).set); remove(currentIndex); } )
+                    remorse.execute(qsTr("Remove %1").arg(get(i).name), function() { DB.removeFromSoundset(get(currentIndex).btnId,get(currentIndex).set); remove(currentIndex); } )
                 }
             }
         }
@@ -915,7 +915,7 @@ Page {
             id: historyBtn
             width: grid.cellWidth
             height: grid.cellHeight
-            text: qsTr(name)
+            text: name
             _playing: playing
             function play() {
                 menuButtons.set(index, {"playing" : true})

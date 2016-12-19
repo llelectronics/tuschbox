@@ -38,7 +38,8 @@ CONFIG += sailfishapp_i18n
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
-TRANSLATIONS += translations/harbour-tuschbox-de.ts
+TRANSLATIONS += translations/harbour-tuschbox-de.ts \
+                translations/harbour-tuschbox-hu.ts
 
 DISTFILES += \
     qml/pages/components/ItemButton.qml \
@@ -76,3 +77,8 @@ HEADERS += \
     src/folderlistmodel/qquickfolderlistmodel.h \
     src/fmhelper.hpp
 
+lupdate_only{
+SOURCES =   qml/*.qml \
+            qml/pages/*.qml \
+            qml/cover/*.qm
+}

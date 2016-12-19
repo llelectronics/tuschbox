@@ -708,7 +708,7 @@ Page {
 
             }
             Label {
-                text: "License: GPL (Version 3)"
+                text: qsTr("License: GPL (Version 3)")
                 anchors.horizontalCenter: parent.horizontalCenter
             }
 
@@ -727,7 +727,7 @@ Page {
             Label {
                 width: 360
                 font.pixelSize: Theme.fontSizeMedium
-                text: "Created by llelectronics"
+                text: qsTr("Created by llelectronics")
                 anchors.horizontalCenter: parent.horizontalCenter
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignHCenter
@@ -747,7 +747,7 @@ Page {
             Button {
                 id: homepage
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "<a href=\"https://github.com/llelectronics/tuschbox\">Sourcecode on Github</a>"
+                text: qsTr("<a href=\"https://github.com/llelectronics/tuschbox\">Sourcecode on Github</a>")
                 onClicked: {
                     Qt.openUrlExternally("https://github.com/llelectronics/tuschbox")
                 }

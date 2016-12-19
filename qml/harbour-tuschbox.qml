@@ -691,7 +691,7 @@ ApplicationWindow
     _defaultPageOrientations: Orientation.All
 
     property string version: "1.1"
-    property string appname: "Tuschbox"
+    property string appname: qsTr("Tuschbox")
     property string appicon: "images/icon.png"
 
     function createSoundPage(name) {

@@ -711,7 +711,7 @@ Page {
 
             function remove() {
                 var removal = removalComponent.createObject(bgdelegate)
-                removal.execute(delegate,qsTr("Deleting ") + sset, function() { DB.removeSoundset(sset); boardLists.clear(); DB.getSoundBoards(soundBoardList) })
+                removal.execute(delegate,qsTr("Deleting %1").arg(sset), function() { DB.removeSoundset(sset); boardLists.clear(); DB.getSoundBoards(soundBoardList) })
             }
 
             ListItem {
